@@ -5,28 +5,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //-----Get all books-----//
-app.get("/books", (req, res) => {
+app.get("/api/books", (req, res) => {
     res.json({
         message: "Books fetched successfully"
     })
 })
 
 //-----Get all books-----//
-app.post("/book", (req, res) => {
+app.post("/api/book", (req, res) => {
     res.json({
         message: "Books uploaded successfully"
     })
 })
 
 //-----Get all books-----//
-app.patch("/books/:id", (req, res) => {
+app.patch("/api/books/:id", (req, res) => {
     res.json({
         message: "Book Title updated successfully"
     })
 })
 
 //-----Get all books-----//
-app.delete("/books/:id", (req, res) => {
+app.delete("/api/books/:id", (req, res) => {
     res.json({
         message: "You're book deleted successfully from the store"
     })
