@@ -10,12 +10,9 @@ sequelize.authenticate()
         console.log("error", err.stack)
     })
 
-const db = {};
-db.Sequelize = Sequelize
-db.sequelize = sequelize
-
 const db = {
     Sequelize : sequelize,
     sequelize: sequelize
 };
 
+export {db}
