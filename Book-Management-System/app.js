@@ -1,7 +1,8 @@
-dotenv.config();
-import express from 'express';
-import dotenv from 'dotenv'
+const express = require('express')
+const dotenv = require('dotenv')
+const {db} = require('./db/db.js')
 const app = express();
+dotenv.config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,6 +34,8 @@ app.delete("/api/books/:id", (req, res) => {
         message: "You're book deleted successfully from the store"
     })
 })
+ 
+db;
 
 const PORT = 3000;
 app.listen(PORT, () => {

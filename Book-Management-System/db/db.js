@@ -1,6 +1,6 @@
-import { Sequelize, DataTypes } from "sequelize"
-import { DB_URL } from "../utils/env.js";
-import { SELECT } from "sequelize/lib/query-types";
+const {DataTypes, Sequelize} = require("sequelize");
+const {DB_URL} = require("../utils/env.js");
+
 const sequelize = new Sequelize(DB_URL);
 
 sequelize.authenticate()
@@ -15,4 +15,4 @@ const db = {
     sequelize: sequelize
 };
 
-export {db}
+module.exports = {db}
