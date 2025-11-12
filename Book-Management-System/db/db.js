@@ -14,5 +14,4 @@ const db = {
     Sequelize : sequelize,
     sequelize: sequelize
 };
-
 module.exports = {db}
