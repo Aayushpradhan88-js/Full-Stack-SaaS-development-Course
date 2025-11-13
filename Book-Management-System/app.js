@@ -26,14 +26,41 @@ app.post("/api/book", async (req, res) => {
     // console.log(bookDetails.bookname) //for specific object key
     // console.log(req.body) //getting body details 
 
-   const createBook = await db.books.create({
+    // if (!bookname || !bookprice || !bookauthor || !bookgeneric) {
+    //     res.status(400).json({
+    //         message: "all fields are required!!"
+    //     });
+    // };
+
+    if (
+        [bookname, bookprice, bookauthor, bookgeneric].some((field) => field?.trim() === "")
+    ) {
+        res.status(400).json({
+            success: false,
+            message: "all fields are required!!"
+        });
+    };
+
+
+    //Ai notes: when to use return throw error
+
+    const bookNameAlreadyExist = await db.books.findOne({ bookname: req.query.bookname });
+    if (bookNameAlreadyExist) {
+        res.status(403).json({
+            message: "Book name is alreay existed!!"
+        });
+    }
+
+    const createBook = await db.books.create({
         bookname, bookprice, bookauthor, bookgeneric
-    })
-    res.json({
-        message: "Books uploaded successfully",
+    });
+    if (!createBook) throw new Error("failed to publish book");
+
+    return res.json({
+        message: "Books Published successfully",
         data: createBook
     })
-})
+});
 
 //-----Get all books-----//
 app.patch("/api/books/:id", (req, res) => {

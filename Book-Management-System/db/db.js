@@ -35,7 +35,7 @@ db.user = require('../models/user.model.js')(sequelize, DataTypes);
 /*
 @alter:false - only update the column name
 */
-sequelize.sync({ alter: true })
+sequelize.sync({ alter: false })
     .then(() => {
         console.log("Database is successfully migrated");
     })
