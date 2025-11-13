@@ -3,11 +3,11 @@
 SYNTAX: @define - .define(modelname:string, attributes:object, options:object)
 */
 
-const bookModel = (sequelize, DataTypes) => {
+const books = (sequelize, DataTypes) => {
     const book = sequelize.define( // .define() fnx le table create garxa
         "Book",  //---model name---//
         { //---attributes--//
-            bookusername: {
+            bookname: {
                 type: DataTypes.STRING,
                 allowNull: false //---data client bata aauda khali hunuhudainaa---//
             },
@@ -23,10 +23,13 @@ const bookModel = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 defaultValue: "None"
             }
+        },
+        { //---Options---//
+            TimeStamp: true
         }
     )
 
     return book;
 };
 
-module.exports = bookModel;
+module.exports = books;

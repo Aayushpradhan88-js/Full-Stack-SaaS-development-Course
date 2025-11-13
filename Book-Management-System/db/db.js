@@ -1,31 +1,25 @@
-const {DataTypes, Sequelize} = require("sequelize");
-const {DB_URL} = require("../utils/env.js");
+const { DataTypes, Sequelize } = require("sequelize");
+const { DB_URL } = require("../utils/env.js");
 
 const sequelize = new Sequelize(DB_URL);
 
+//Supabase connection 
 sequelize.authenticate()
     .then(() => {
-        console.log("database connected successfully", DB_URL)
+        console.log("database connected successfully")
     }).catch((err) => {
-        console.log("error", err.stack)
-    })
+        console.log("database connection error", err.stack)
+    });
 
-const db = { // db bhadoo maa create gareko model haru save hunxa
-    Sequelize : sequelize,
+const db = {
+    Sequelize: sequelize, //db bhadoo maa create gareko model haru save hunxa
     sequelize: sequelize
+
 };
 
-
 /*IMPORTING BOOK MODEL*/
-// db.book = require('../models/book.model')(sequelize, DataTypes)
-
-const bookModel = require('../models/book.model.js');
-const bookRes = bookModel(sequelize, DataTypes);
-db.book = bookRes;
-
-const userModel = require('../models/user.model.js');
-const userRes = userModel(sequelize, DataTypes);
-db.user = userRes
+db.books = require('../models/book.model.js')(sequelize, DataTypes)
+db.user = require('../models/user.model.js')(sequelize, DataTypes);
 
 //---MIGRATION DATABASE---//
 
@@ -41,15 +35,9 @@ db.user = userRes
 /*
 @alter:false - only update the column name
 */
-sequelize.sync({alter:false}) 
-.then(() => {
-    console.log("Database is successfully migrated");
-})
+sequelize.sync({ alter: true })
+    .then(() => {
+        console.log("Database is successfully migrated");
+    })
 
-// if(migration){
-//     console.log("Database is successfully migrated");
-// } else {
-//     console.error("failed to migrate the database", error.stack);
-// }
-
-module.exports = {db}
+module.exports = { db }
