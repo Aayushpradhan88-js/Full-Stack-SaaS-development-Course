@@ -14,7 +14,6 @@ sequelize.authenticate()
 const db = {
     Sequelize: sequelize, //db bhadoo maa create gareko model haru save hunxa
     sequelize: sequelize
-
 };
 
 /*IMPORTING BOOK MODEL*/
