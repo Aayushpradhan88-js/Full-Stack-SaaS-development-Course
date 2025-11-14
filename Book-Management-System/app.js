@@ -22,44 +22,49 @@ app.get("/api/books", async (req, res) => {
 
 //-----Get all books-----//
 app.post("/api/book", async (req, res) => {
-    const { bookname, bookprice, bookauthor, bookgeneric } = req.body
-    // console.log(bookDetails.bookname) //for specific object key
-    // console.log(req.body) //getting body details 
 
-    // if (!bookname || !bookprice || !bookauthor || !bookgeneric) {
-    //     res.status(400).json({
-    //         message: "all fields are required!!"
-    //     });
-    // };
+    try {
+        const { bookname, bookprice, bookauthor, bookgeneric } = req.body;
 
-    if (
-        [bookname, bookprice, bookauthor, bookgeneric].some((field) => field?.trim() === "")
-    ) {
-        res.status(400).json({
-            success: false,
-            message: "all fields are required!!"
+        // Validate required fields
+        if (!bookname || !bookprice || !bookauthor || !bookgeneric) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
+        }
+
+        const existingBook = await db.books.findOne({ bookname: bookname });
+        // Or simply: const existingBook = await db.books.findOne({ bookname });
+
+        if (existingBook) {
+            return res.status(409).json({
+                success: false,
+                message: "Book with this name already exists"
+            });
+        }
+
+        // Create new book
+        const newBook = await db.books.create({
+            bookname,
+            bookprice,
+            bookauthor,
+            bookgeneric
         });
-    };
 
+        return res.status(201).json({
+            success: true,
+            message: "Book published successfully",
+            data: newBook
+        });
 
-    //Ai notes: when to use return throw error
-
-    const bookNameAlreadyExist = await db.books.findOne({ bookname: req.query.bookname });
-    if (bookNameAlreadyExist) {
-        res.status(403).json({
-            message: "Book name is alreay existed!!"
+    } catch (error) {
+        console.error("Error creating book:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error"
         });
     }
-
-    const createBook = await db.books.create({
-        bookname, bookprice, bookauthor, bookgeneric
-    });
-    if (!createBook) throw new Error("failed to publish book");
-
-    return res.json({
-        message: "Books Published successfully",
-        data: createBook
-    })
 });
 
 //-----Get all books-----//
