@@ -68,7 +68,7 @@ const updateBook = async (req, res) => {
     const id = req.params.id; //@params - to get id from url
 
     try {
-        //@update - to update book details
+        //@update - to update book details (PATCH request)
         const updateBookDetails = await db.books.update({
             bookname,
             bookprice,
@@ -116,7 +116,7 @@ const deleteBook = async (req, res) => {
 
         const { bookauthor, bookname } = fetchBook;
 
-        //@destroy - to delete item
+        //@destroy - to delete item (DELETE request)
         const deleteBook = await db.books.destroy({
             where: {
                 id: id
