@@ -50,7 +50,7 @@ const addBook = async (req, res) => {
 
         return res.status(201).json({
             success: true,
-            message: "Book published successfully",
+            message: `${bookauthor}, your ${bookname} book has been successfully published`,
             data: newBook
         });
     } catch (error) {
