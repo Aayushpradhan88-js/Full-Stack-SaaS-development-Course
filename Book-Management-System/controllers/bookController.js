@@ -111,11 +111,13 @@ const updateBook = async (req, res) => {
             return res.status(400).json({
                 message: "Unable to update book details"
             })
-        }
+        };
+
+        const updatedDetails = await db.books.findOne({where: {bookname, bookauthor}})
 
         return res.status(200).json({
-            message: `${updateBookDetails.bookauthor} you're book details are updated successfully`,
-            data: updateBookDetails
+            message: `${updatedDetails.bookauthor} you're book details are updated successfully`,
+            data: updatedDetails
         })
     } catch (error) {
         console.error("Error updating book:", error.stack);
