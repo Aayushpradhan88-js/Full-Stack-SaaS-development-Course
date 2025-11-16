@@ -68,8 +68,34 @@ const updateBook = async (req, res) => {
     const { bookname, bookprice, bookauthor, bookgeneric } = req.body;
     const id = req.params.id; //@params - to get id from url
     // const id = req.body.id;  // second method to access the id from body
+    if (!bookname || !bookprice || !bookauthor || !bookgeneric) {
+        return res.status(400).json({
+            success: false,
+            message: "All fields are required"
+        });
+    }
 
     try {
+        const existingBook = await db.books.findByPk(id)
+        if (existingBook === null) {
+            return res.status(404).json({
+                success: false,
+                message: "Book not found"
+            });
+        }
+
+        if (bookname && bookname !== existingBook.bookname) {
+            const dublicate = await db.books.findOne({
+                where: { bookname }
+            })
+            if(dublicate){
+                return res.status(401).json({
+                    success: true,
+                    message: `${dublicate} is already existed try another`
+                })
+            };
+        };
+
         //@update - to update book details (PATCH request)
         const updateBookDetails = await db.books.update({
             bookname,
