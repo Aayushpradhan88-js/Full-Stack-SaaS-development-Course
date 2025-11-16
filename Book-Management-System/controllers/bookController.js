@@ -20,6 +20,38 @@ const getAllBooks = async (_, res) => {
         data: getBooks
     });
 };
+const getAllBooksById = async (req, res) => {
+    const urlId = req.params.id;
+    if (!urlId) {
+        return res.json({
+            message: "falied to get id"
+        });
+    };
+
+    try {
+        const fetchBooks = await db.books.findByPk(urlId);
+        if (!fetchBooks) {
+            return res.status(403).json({
+                success: false,
+                message: "unable to fetch book"
+            });
+        };
+
+        const { bookauthor } = fetchBooks;
+
+        return res.status(200).json({
+            success: true,
+            message: `${bookauthor} you're book fetched successfully`,
+            data: fetchBooks
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'internal server error',
+            error: error.stack
+        });
+    }
+}
 
 const postBook = async (req, res) => {
     const { bookname, bookprice, bookauthor, bookgeneric } = req.body;
@@ -63,7 +95,7 @@ const postBook = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: 'successfully upload book in database',
+            message: `${bookauthor} you're book has been successfully published`,
             data: createBook
         });
     } catch (error) {
@@ -75,4 +107,5 @@ const postBook = async (req, res) => {
     }
 };
 
-module.exports = { getAllBooks, postBook }
+
+module.exports = { getAllBooks, postBook, getAllBooksById }
