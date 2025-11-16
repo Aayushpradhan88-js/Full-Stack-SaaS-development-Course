@@ -67,6 +67,7 @@ const addBook = async (req, res) => {
 const updateBook = async (req, res) => {
     const { bookname, bookprice, bookauthor, bookgeneric } = req.body;
     const id = req.params.id; //@params - to get id from url
+    // const id = req.body.id;  // second method to access the id from body
 
     try {
         //@update - to update book details (PATCH request)
@@ -77,7 +78,7 @@ const updateBook = async (req, res) => {
             bookgeneric
         }, {
             where: {
-                id: id
+                id
             }
         });
         if (!updateBookDetails) {
@@ -87,7 +88,7 @@ const updateBook = async (req, res) => {
         }
 
         return res.status(200).json({
-            message: "Book details updated successfully",
+            message: `${updateBookDetails.bookauthor} you're book details are updated successfully`,
             data: updateBookDetails
         })
     } catch (error) {
@@ -99,6 +100,46 @@ const updateBook = async (req, res) => {
     }
 }
 
+//Single Fetch
+const getBookId = async (req, res) => {
+    const id = req.params.id; //@params - to get id from url
+    try {
+        //@findByPk - to get book by primary key
+        const getId = await db.books.findByPk(id);
+        if (!getId) {
+            return res.status(404).json({
+                success: false,
+                message: "unable to find userId"
+            })
+        };
+
+        //fetching user
+        const fetchUser = await db.books.findOne({
+            where: {
+                id
+            }
+        });
+        if (!fetchUser) {
+            return res.status(404).json({
+                success: false,
+                message: "unable to fetch user data"
+            })
+        };
+        const { bookauthor } = fetchUser;
+
+        return res.status(200).json({
+            success: false,
+            message: `${bookauthor} you're books fetched successfully`,
+            data: getId
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'internal server error!!'
+        });
+    };
+};
+
 //Delete book
 const deleteBook = async (req, res) => {
     const id = req.params.id;
@@ -106,7 +147,7 @@ const deleteBook = async (req, res) => {
         //fetching book
         const fetchBook = await db.books.findOne({
             where: {
-                id: id
+                id
             }
         });
         if (!fetchBook) {
@@ -148,9 +189,10 @@ const deleteBook = async (req, res) => {
 /*
 @features
  - get book
+ - get book with id
  - add book
- - upate book
- - delete book
+ - update book with id
+ - delete book with id
 */
 
-module.exports = { getAllBooks, addBook, updateBook, deleteBook } 
+module.exports = { getAllBooks, addBook, updateBook, getBookId, deleteBook } 
