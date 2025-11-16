@@ -1,4 +1,5 @@
-const { where } = require('sequelize');
+//CONTROLLER FILE
+
 const { db } = require('../db/db');
 
 //Get all books
@@ -143,5 +144,13 @@ const deleteBook = async (req, res) => {
         });
     }
 }
+
+/*
+@features
+ - get book
+ - add book
+ - upate book
+ - delete book
+*/
 
 module.exports = { getAllBooks, addBook, updateBook, deleteBook } 

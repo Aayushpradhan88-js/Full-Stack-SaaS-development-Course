@@ -1,8 +1,10 @@
+//MAIN APPLICATION FILE
+
 const express = require('express');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
+// dotenv.config();
 const bookRouter = require('./routes/bookRoutes');
 const app = express();
-dotenv.config();
 
 app.use(express.json()); //parser the JSON data from the body.
 app.use(express.urlencoded({ extended: true }));
@@ -14,3 +16,5 @@ const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`SERVER IS RUNNING ON PORT: ${PORT}`);
 });
+
+    // "start": "node --watch app.js",
