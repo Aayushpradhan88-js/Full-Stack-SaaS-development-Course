@@ -110,7 +110,7 @@ const postBook = async (req, res) => {
 
 const editBookDetails = async (req, res) => {
     const { bookname, bookprice, bookauthor, bookgeneric } = req.body;
-    const minPriceValue = 50;
+    const minBookPrice = 50;
     const urlId = req.params.id;
     if (!urlId) {
         return res.json({
@@ -118,47 +118,57 @@ const editBookDetails = async (req, res) => {
         });
     };
 
-    const fetchBooks = await db.books.findByPk(urlId);
-    if (!fetchBooks) {
-        return res.status(403).json({
-            success: false,
-            message: "unable to fetch book"
-        });
-    };
+    try {
+        const fetchBooks = await db.books.findByPk(urlId);
+        if (!fetchBooks) {
+            return res.status(403).json({
+                success: false,
+                message: "unable to fetch book"
+            });
+        };
 
-    if (bookname && bookname === fetchBooks.bookname) {
-        const sameBook = await db.books.findOne(bookname);
-        if (sameBook) {
-            return res.status(405).json({
-                message: "book name is already registered"
+        if (bookname && bookname === fetchBooks.bookname) {
+            const sameBook = await db.books.findOne({ where: { bookname } });
+            if (sameBook) {
+                return res.status(405).json({
+                    message: `${bookname} is already registered`
+                })
+            }
+        };
+        if (minBookPrice > bookprice) {
+            return res.status(402).json({
+                message: `${bookprice} price is very low`
             })
-        }
-    };
-    if(minPriceValue < bookprice || bookprice === ''){
-        return res.status(402).json({
-            message: `${bookprice} is very low price`
-        })
-    }
+        };
 
-    //@TODO: IF BOOK PRICE IS HIGH THEN 
+        //@TODO: IF BOOK PRICE IS HIGH THEN 
 
-    const updateBook = db.books.update({
-        bookname, bookprice, bookauthor, bookgeneric
-    }, { where: { id: userId } });
-    if (!updateBook) {
-        return res.status(403).json({
-            success: false,
-            message: "unable to updateBook"
+        const updateBook = await db.books.update({
+            bookname,
+            bookprice,
+            bookauthor,
+            bookgeneric
+        }, { where: { id: urlId } });
+        if (!updateBook) {
+            return res.status(403).json({
+                success: false,
+                message: "unable to updateBook"
+            });
+        };
+
+        const updatedDetails = await db.books.findOne({ where: { bookname, bookauthor } })
+        return res.status(200).json({
+            success: true,
+            message: `${updatedDetails.bookauthor} you're book ${updatedDetails.bookname} is successfully updated`,
+            data: updatedDetails
         });
-    };
-
-    const bookauthorname = updateBook.bookauthor;
-
-    return res.status(200).json({
-        success: true,
-        message: `${bookauthorname} you're successfully updated`,
-        data: updateBook
-    });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'internal server error',
+            error: error.stack
+        });
+    }
 
 }
 
@@ -168,11 +178,40 @@ const deleteBook = async (req, res) => {
         return res.status(402).json({
             success: false,
             message: "cannot get url"
-        })
+        });
+    };
+    try {
+        const existingData = await db.books.findByPk(urlId);
+        if (!existingData) {
+            return res.send(404).json({
+                message: "you're data is not available"
+            });
+        };
+
+        const deleteData = await db.books.destroy({ where: { id: urlId } });
+        if (!deleteData) {
+            return res.status(400).json({
+                success: false,
+                message: "unable to delete book"
+            });
+        };
+
+        const fetchBook = await db.books.findOne({ where: { bookname, bookauthor } });
+        if (!fetchBook) {
+            return res.json({ message: "unable to fetch user book" })
+        };
+
+        return res.status(200).json({
+            success: false,
+            message: `${bookauthor} you're book ${bookname} has been successfully deleted!!`
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'internal server error',
+            error: error.stack
+        });
     }
-
-    const existingData = await db.books.findByPk(urlId);
-
 }
 
-module.exports = { getAllBooks, postBook, getAllBooksById, editBookDetails }
+module.exports = { getAllBooks, postBook, getAllBooksById, editBookDetails, deleteBook }
