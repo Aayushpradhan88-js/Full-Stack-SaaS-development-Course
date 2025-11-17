@@ -74,10 +74,11 @@ const postBook = async (req, res) => {
         });
     };
 
-    if (minBookPrice > bookprice) {
+    //@feature have issue fix it
+    if (minBookPrice < bookprice) {
         return res.status(402).json({
             success: false,
-            message: 'Enter at least RS.10 then above'
+            message: `${bookprice} price is very low`
         });
     };
 
@@ -197,13 +198,8 @@ const deleteBook = async (req, res) => {
             });
         };
 
-        const fetchBook = await db.books.findOne({ where: { bookname, bookauthor } });
-        if (!fetchBook) {
-            return res.json({ message: "unable to fetch user book" })
-        };
-
         return res.status(200).json({
-            success: false,
+            success: true,
             message: "you're book has been successfully deleted!!"
         });
     } catch (error) {
