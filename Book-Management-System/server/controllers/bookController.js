@@ -64,6 +64,7 @@ const postBook = async (req, res) => {
             message: 'all fields are required'
         });
     };
+    const minBookPrice = 50;
 
     const existedBookName = await db.books.findOne({ where: { bookname } });
     if (existedBookName) {
@@ -73,7 +74,7 @@ const postBook = async (req, res) => {
         });
     };
 
-    if (10 > bookprice) {
+    if (minBookPrice > bookprice) {
         return res.status(402).json({
             success: false,
             message: 'Enter at least RS.10 then above'
