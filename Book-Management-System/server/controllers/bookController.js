@@ -34,7 +34,7 @@ const getAllBooksById = async (req, res) => {
         if (!fetchBooks) {
             return res.status(403).json({
                 success: false,
-                message: "unable to fetch book"
+                message: "Book is not existed in database"
             });
         };
 
@@ -203,7 +203,7 @@ const deleteBook = async (req, res) => {
 
         return res.status(200).json({
             success: false,
-            message: `${bookauthor} you're book ${bookname} has been successfully deleted!!`
+            message: "you're book has been successfully deleted!!"
         });
     } catch (error) {
         return res.status(500).json({
