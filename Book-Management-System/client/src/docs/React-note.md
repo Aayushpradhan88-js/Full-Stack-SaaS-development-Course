@@ -19,4 +19,11 @@ Routing
 React ma routing hudaainaa, uslee tio feature provide gardaainaa haamilee bahiraa bata launue parxa means package installation garnu parxaa. kina provide na garekoo? kina bhanee react autaa library hoo matlab dheraai kura Uslee provide gardaaina......
 
 Package ko naam  - react-router-dom
+
+SYNTAX
+<BrowserRouter>
+            <Routes>
+                <Route path='/' element={} />
+            </Routes>
+        </BrowserRouter>
 ````````
