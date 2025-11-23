@@ -27,3 +27,6 @@ SYNTAX
             </Routes>
         </BrowserRouter>
 ````````
+
+````````
+useEffect()

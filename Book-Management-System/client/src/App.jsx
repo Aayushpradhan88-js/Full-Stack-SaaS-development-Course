@@ -1,18 +1,14 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './Home'   
+import Effect from './hooks/effect'
 
 function App() {
     return(
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/contacts/:id' element={
-                    <div>
-                        <a href="/">Go to home</a>
-                    </div>
-                }
-                     />
+                <Route path='/effect' element={<Effect />} />
             </Routes>
         </BrowserRouter>
     )
