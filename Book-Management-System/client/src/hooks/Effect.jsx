@@ -2,9 +2,10 @@ import { useEffect } from "react";
 
 function Effect() {
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [])
+    // }, [])
+    console.log(useEffect);
 
     return (
         <h1>understanding use effect hook</h1>
