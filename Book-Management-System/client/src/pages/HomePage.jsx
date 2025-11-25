@@ -5,15 +5,12 @@ import Card from '../components/Card'
 
 const HomePage = () => {
   return (
-    <>
+    < div className=' bg-black min-h-screen'>
       <NavBar />
-      <div className='flex flex-wrap justify-center gap-6 p-6 bg-black'>
-        <Card />
-        <Card />
-        <Card />
+      <div className='p-6'>
         <Card />
       </div>
-    </>
+    </div >
   )
 }
 

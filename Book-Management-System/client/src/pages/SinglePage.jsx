@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const SinglePage = () => {
   return (
-    <div className='bg-black'>
+    <div className='bg-black min-h-screen'>
       <NavBar />
       <Link to="/">
         <div className='mt-4 ml-2'>
