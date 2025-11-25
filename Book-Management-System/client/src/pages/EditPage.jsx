@@ -1,10 +1,18 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
+import { Link } from 'react-router-dom'
+import Button from '../components/Button'
 
 const EditPage = () => {
   return (
-    <>
+    <div className=" bg-black">
       <NavBar />
+
+      <Link to="/">
+        <div className='mt-4  ml-3'>
+          <Button title="Back to home" />
+        </div>
+      </Link>
 
       <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase">
@@ -70,7 +78,7 @@ const EditPage = () => {
       <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
         Pay Now
       </button>
-    </>
+    </div >
   )
 }
 

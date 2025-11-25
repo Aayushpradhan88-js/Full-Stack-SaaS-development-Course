@@ -1,12 +1,19 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
+import Button from '../components/Button'
+import { Link } from 'react-router-dom'
 
 const CreatePage = () => {
   return (
-    <>
+    <div className=" bg-black">
       <NavBar />
 
-      {/* code */}
+  
+      <Link to="/">
+        <div className='mt-4  ml-3'>
+          <Button title="Back to home" />
+        </div>
+      </Link>
 
       <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase">
@@ -69,7 +76,7 @@ const CreatePage = () => {
         </form>
       </div>
 
-    </>
+    </div>
   )
 }
 

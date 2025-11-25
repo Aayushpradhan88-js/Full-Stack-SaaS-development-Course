@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom'
 
 const SinglePage = () => {
   return (
-    <>
+    <div className='bg-black'>
       <NavBar />
       <Link to="/">
-        <div className='mt-4 flex  bg-red-400'>
+        <div className='mt-4 ml-2'>
           <Button title="Back to home" />
         </div>
       </Link>
@@ -22,12 +22,12 @@ const SinglePage = () => {
             </div>
           </Link>
           <div className='bg-red-600 flex rounded-lg dark:focus:ring-red-800 dark:hover:bg-red-700'>
-            <Button title="delete" />
+           <Button title="delete" /> 
           </div>
 
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

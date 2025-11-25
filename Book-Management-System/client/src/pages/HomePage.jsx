@@ -7,8 +7,7 @@ const HomePage = () => {
   return (
     <>
       <NavBar />
-      <div className='flex flex-wrap'>
-
+      <div className='flex flex-wrap justify-center gap-6 p-6 bg-black'>
         <Card />
         <Card />
         <Card />
