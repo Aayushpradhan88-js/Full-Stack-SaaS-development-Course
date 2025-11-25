@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './Home'
+import HomePage from './pages/HomePage'
 import EditPage from './pages/EditPage'
 import SinglePage from './pages/SinglePage'
 import CreatePage from './pages/CreatePage'
@@ -9,7 +9,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/' element={<HomePage />} />
                 <Route path='/create' element={<CreatePage />} />
                 <Route path='/edit/:id' element={<EditPage />} />
                 <Route path='/:id' element={<SinglePage />} />
