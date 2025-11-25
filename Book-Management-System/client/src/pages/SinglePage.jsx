@@ -1,8 +1,11 @@
 import React from 'react'
+import NavBar from '../components/NavBar'
 
 const SinglePage = () => {
   return (
-    <div>SinglePage</div>
+       <>
+     <NavBar/>
+    </>
   )
 }
 

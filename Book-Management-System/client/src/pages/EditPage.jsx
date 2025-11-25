@@ -1,8 +1,11 @@
 import React from 'react'
+import NavBar from '../components/NavBar'
 
 const EditPage = () => {
   return (
-    <div>EditPage</div>
+        <>
+     <NavBar/>
+    </>
   )
 }
 
