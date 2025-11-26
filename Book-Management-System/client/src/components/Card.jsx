@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 const Card = () => {
     return (
         <>
-
-            <Link to="/singlepage">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                <Link to="/singlepage">
                     <img className="p-8 rounded-t-lg" src="https://rukminim1.flixcart.com/image/850/1000/l3929ow0/regionalbooks/b/a/f/shreemad-bhagwat-geeta-original-imageeufsk4ds57y.jpeg?q=90" alt="product image" />
                     <div className="px-5">
                         <h5 className="px-5 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport</h5>
@@ -38,7 +37,9 @@ const Card = () => {
                             </button>
                         </div>
                     </div>
+                </Link>
 
+                <Link to="/singlepage">
                     <img className="p-8 rounded-t-lg" src="https://5.imimg.com/data5/SELLER/Default/2022/3/QD/IO/OA/29351946/71-7k19gktl-500x500.jpg" alt="product image" />
                     <div className="px-5 pb-5">
                         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport</h5>
@@ -70,7 +71,9 @@ const Card = () => {
                             </button>
                         </div>
                     </div>
+                </Link>
 
+                <Link to="/singlepage">
                     <img className="p-8 rounded-t-lg" src="https://cdn2.penguin.com.au/covers/original/9781593279509.jpg" alt="product image" />
                     <div className="px-5 pb-5">
                         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport</h5>
@@ -102,7 +105,9 @@ const Card = () => {
                             </button>
                         </div>
                     </div>
+                </Link>
 
+                <Link to="/singlepage">
                     <img className="p-8 rounded-t-lg" src="https://tse4.mm.bing.net/th/id/OIP.6by501tyhR1lW498nlg9tAHaGI?rs=1&pid=ImgDetMain&o=7&rm=3" alt="product image" />
                     <div className="px-5 pb-5">
                         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport</h5>
@@ -134,7 +139,8 @@ const Card = () => {
                             </button>
                         </div>
                     </div>
-
+                </Link>
+                <Link to="/singlepage">
                     <img className="p-8 rounded-t-lg" src="https://m.media-amazon.com/images/I/81vAYm-YCxL._SL1500_.jpg" alt="product image" />
                     <div className="px-5 pb-5">
                         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport</h5>
@@ -166,7 +172,8 @@ const Card = () => {
                             </button>
                         </div>
                     </div>
-
+                </Link>
+                <Link to="/singlepage">
                     <img className="p-8 rounded-t-lg" src="https://tse3.mm.bing.net/th/id/OIP.qzqL6KT4VmDor7SCZ3YtFgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3g" alt="product image" />
                     <div className="px-5 pb-5">
                         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport</h5>
@@ -198,9 +205,8 @@ const Card = () => {
                             </button>
                         </div>
                     </div>
-                </div>
-
-            </Link>
+                </Link>
+            </div>
         </>
     )
 }
