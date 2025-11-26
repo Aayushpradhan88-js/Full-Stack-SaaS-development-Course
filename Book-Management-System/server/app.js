@@ -8,7 +8,7 @@ const app = express();
 const cors = require('cors');
 
 
-app.use(cors({origin: 'http://localhost:5173'}));
+app.use(cors({origin: 'http://localhost:5174'}));
 app.use(express.json()); //parser the JSON data from the body.
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,10 +1,47 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import SinglePage from '../pages/SinglePage';
 
-const Card = () => {
+const Card = ({ book }) => {
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            <div className='bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden'>
+                <div className='relative overflow-hidden'>
+                    <Link to="/singlepage">
+                        <h1 className='object-cover cursor-pointer font-bold text-center p-30 bg-black text-white'>{book.bookgeneric}</h1>
+                    </Link>
+                    <div className='p-4'>
+                        <h3 className='text-gray-800 text-lg font-bold truncate mb-1'>{book.bookname}</h3>
+                        <p className='text-gray-800 texts-sm truncate'>{book.bookauthor}</p>
+                        <p className='text-green-500 text-lg font-bold'>Rs. {book.bookprice}</p>
+                        <p className='text-white bg-black text-center rounded-lg p-3 text-sm cursor-pointer'>Add to Cart</p>
+                    </div>
+                </div>
+            </div>
+                        {/* <SinglePage book={book} /> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
                 <Link to="/singlepage">
                     <img className="p-2 rounded-t-lg" src="https://rukminim1.flixcart.com/image/850/1000/l3929ow0/regionalbooks/b/a/f/shreemad-bhagwat-geeta-original-imageeufsk4ds57y.jpeg?q=90" alt="product image" />
                     <div className="px-5 pb-5">
@@ -188,6 +225,7 @@ const Card = () => {
                                 </svg>
                                 <svg className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                     <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                  
                                 </svg>
                                 <svg className="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                     <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
@@ -206,7 +244,7 @@ const Card = () => {
                         </div>
                     </div>
                 </Link>
-            </div>
+            </div> */}
         </>
     )
 }
