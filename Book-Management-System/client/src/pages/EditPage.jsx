@@ -12,22 +12,25 @@ const EditPage = () => {
   const [bookgeneric, setBookGeneric] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const editBook = async () => {
     try {
-      const response = await axios.patch(`http://localhost:3000/api/book/${id}`);
+      const response = await axios.patch(`http://localhost:3000/api/book/${id}`,{
+        bookname, bookprice, bookauthor, bookgeneric
+      });
+      console.log(response)
       if (response.status === 200) {
-        navigate("/");
+        // navigate("/");
         setLoading(false);
         alert("successfully edited")
       } else {
-        navigate("/edit");
+        // navigate("/edit");
         setError("failed to edit");
         alert("failed to edit");
       }
     } catch (error) {
-      navigate("/edit");
+      // navigate("/edit");
       setError("failed to edit", error);
     }
   };
@@ -52,7 +55,7 @@ const EditPage = () => {
           <div className="fixed inset-0 transition-opacity" aria-hidden="true">
             <div className="absolute inset-0 bg-gray-500 opacity-75" />
           </div>
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
+          {/* go to markdown code edited? */}
           <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <div>
               <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
@@ -83,9 +86,8 @@ const EditPage = () => {
   }
 
   return (
-    <div className=" bg-black min-h-screen">
+  <div className=" bg-black min-h-screen">
       <NavBar />
-
       <Link to="/">
         <div className='mt-4  ml-3'>
           <Button title="Back to home" />
@@ -93,11 +95,24 @@ const EditPage = () => {
       </Link>
 
       <form onSubmit={editBook}>
-        <div className="  max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
           <div className="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase">
             Edit Book
           </div>
-          <div className="py-4 px-6">
+
+          <div className="py-4 px-6" >
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+                Book Name
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="bookname"
+                type="text"
+                value={bookname}
+                onChange={(e) => setBookName(e.target.value)}
+                placeholder="Bhagwat Geeta" />
+            </div>
 
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
@@ -108,21 +123,8 @@ const EditPage = () => {
                 id="bookauthor"
                 type="text"
                 value={bookauthor}
-                onClick={(e) => setBookAuthor(e.prevent.default)}
+                onChange={(e) => setBookAuthor(e.target.value)}
                 placeholder="Maharishi Ved Vyasa" />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-                Book Name
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="bookname"
-                type="text"
-                value={bookname}
-                onClick={(e) => setBookName(e.prevent.default)}
-                placeholder="Bhagwat Geeta" />
             </div>
 
             <div className="mb-4">
@@ -134,7 +136,7 @@ const EditPage = () => {
                 id="bookprice"
                 type="text"
                 value={bookprice}
-                onClick={(e) => setBookPrice(e.prevent.default)}
+                onChange={(e) => setBookPrice(e.target.value)}
                 placeholder="1000" />
             </div>
 
@@ -147,16 +149,15 @@ const EditPage = () => {
                 id="bookgeneric"
                 type="text"
                 value={bookgeneric}
-                onClick={(e) => setBookGeneric(e.prevent.default)}
+                onChange={(e) => setBookGeneric(e.target.value)}
                 placeholder="Hinduism" />
             </div>
 
             <div className="flex items-center justify-center mb-4">
               <button
-                className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                 type="submit"
                 disabled={loading}
-              >
+                className="bg-gray-900 cursor-pointer text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline" type="submit">
                 {loading ? (
                   <>
                     <div aria-label="Loading..." role="status"><svg className="h-12 w-12 animate-spin stroke-gray-500" viewBox="0 0 256 256">
@@ -180,8 +181,8 @@ const EditPage = () => {
             </div>
           </div>
         </div>
-      </form >
-    </div >
+      </form>
+    </div>
   )
 }
 

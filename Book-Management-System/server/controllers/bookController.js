@@ -146,8 +146,8 @@ const editBookDetails = async (req, res) => {
 
         const updateBook = await db.books.update({
             bookname,
-            bookprice,
             bookauthor,
+            bookprice,
             bookgeneric
         }, { where: { id: urlId } });
         if (!updateBook) {
