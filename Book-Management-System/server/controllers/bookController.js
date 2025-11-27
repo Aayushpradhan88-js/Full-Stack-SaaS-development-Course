@@ -55,9 +55,9 @@ const getAllBooksById = async (req, res) => {
 }
 
 const postBook = async (req, res) => {
-    const { bookname, bookprice, bookauthor, bookgeneric } = req.body;
+    const { bookname, bookauthor, bookprice, bookgeneric } = req.body;
     if (
-        [bookname, bookprice, bookauthor, bookgeneric].some((fields) => fields.trim === '')
+        !bookname, !bookauthor, !bookprice, !bookgeneric
     ) {
         return res.status(401).json({
             success: false,
@@ -75,7 +75,7 @@ const postBook = async (req, res) => {
     };
 
     //@feature have issue fix it
-    if (minBookPrice < bookprice) {
+    if (minBookPrice > bookprice) {
         return res.status(402).json({
             success: false,
             message: `${bookprice} price is very low`
