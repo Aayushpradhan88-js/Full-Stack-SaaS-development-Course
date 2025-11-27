@@ -12,7 +12,7 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/create' element={<CreatePage />} />
                 <Route path='/edit' element={<EditPage />} />
-                <Route path='/singlepage' element={<SinglePage />} />
+                <Route path='/singlepage/:id' element={<SinglePage />} />
             </Routes>
         </BrowserRouter>
     )

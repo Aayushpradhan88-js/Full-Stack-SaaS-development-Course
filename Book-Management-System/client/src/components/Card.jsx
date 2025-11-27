@@ -5,20 +5,19 @@ import SinglePage from '../pages/SinglePage';
 const Card = ({ book }) => {
     return (
         <>
-            <div className='bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden'>
+            <div className='bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden'>
                 <div className='relative overflow-hidden'>
-                    <Link to="/singlepage">
-                        <h1 className='object-cover cursor-pointer font-bold text-center p-30 bg-black text-white'>{book.bookgeneric}</h1>
+                    <Link to={`/singlepage/${book.id}`}>
+                        <h1 className='object-cover cursor-pointer font-bold text-center p-30 bg-gray-800 text-white'>{book.bookgeneric}</h1>
+                        <div className='p-4'>
+                            <h3 className='text-gray-800 text-lg font-bold truncate mb-1'>{book.bookname}</h3>
+                            <p className='text-gray-800 texts-sm truncate'>{book.bookauthor}</p>
+                            <p className='text-green-500 text-lg font-bold'>Rs. {book.bookprice}</p>
+                            <p className='text-white bg-black text-center rounded-lg p-3 text-sm cursor-pointer'>Add to Cart</p>
+                        </div>
                     </Link>
-                    <div className='p-4'>
-                        <h3 className='text-gray-800 text-lg font-bold truncate mb-1'>{book.bookname}</h3>
-                        <p className='text-gray-800 texts-sm truncate'>{book.bookauthor}</p>
-                        <p className='text-green-500 text-lg font-bold'>Rs. {book.bookprice}</p>
-                        <p className='text-white bg-black text-center rounded-lg p-3 text-sm cursor-pointer'>Add to Cart</p>
-                    </div>
                 </div>
             </div>
-                        {/* <SinglePage book={book} /> */}
 
 
 

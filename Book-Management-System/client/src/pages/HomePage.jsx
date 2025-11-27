@@ -12,7 +12,6 @@ const HomePage = () => {
     const fetchAllBooks = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/books/')
-        console.log("all books value - 1", response) 
         setBooks(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -22,8 +21,6 @@ const HomePage = () => {
     };
     fetchAllBooks();
   }, []);
-
-  console.log("all books value - 2",books)
 
   if (loading) {
     return (
@@ -75,14 +72,12 @@ const HomePage = () => {
   }
 
   return (
-    <div className=' bg-white min-h-screen'>
+    <div className=' bg-black min-h-screen'>
       <NavBar />
       <div className='p-6  flex gap-4'>
         {books.map((book) => {
-          return(
-            <Card 
-            book={book}
-            />
+          return (
+            <Card key={book.id} book={book} />
           )
         })}
       </div>
@@ -90,4 +85,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default HomePage;

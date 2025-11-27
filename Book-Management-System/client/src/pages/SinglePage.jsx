@@ -1,66 +1,127 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import NavBar from '../components/NavBar'
-import Card from '../components/Card'
 import Button from '../components/Button'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const SinglePage = () => {
-  return (
-    <div className='bg-black min-h-screen'>
-      <NavBar />
-      <Link to="/">
-        <div className='mt-4 ml-2'>
-          <Button title="Back to home" />
-        </div>
-      </Link>
-      <div className=' grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6'>
+  const { id } = useParams();
+  const [book, setBook] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  console.log(id)
 
-          <img className="p-8 rounded-t-lg" src="https://cdn2.penguin.com.au/covers/original/9781593279509.jpg" alt="product image" />
-          <div className="px-5 pb-5">
-            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Eloquent JavaScript by Marjin Haverbeke</h5>
-            <div className="flex items-center mt-2.5 mb-5">
-              <div className="flex items-center space-x-1 rtl:space-x-reverse">
+  useEffect(() => {
+    const fetchBookWithId = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/books/${id}`);
+        console.log("single book", response);
+        setBook(response.data.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error)
+        setLoading(false)
+      }
+    }
+    fetchBookWithId();
+  }, [id]);
 
-                <svg className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg className="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
+
+  //loading animation
+if (loading) {
+    return (
+      <div className="flex space-x-2 justify-center items-center bg-white h-screen dark:invert">
+        <span className="sr-only">Loading...</span>
+        <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]" />
+        <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]" />
+        <div className="h-8 w-8 bg-black rounded-full animate-bounce" />
+      </div>
+    )
+  }
+
+  //error message
+  if (error) {
+    return (
+      <div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div className="absolute inset-0 bg-gray-500 opacity-75">
+            </div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+              <div>
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                  <svg className="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokelinecap="round" strokelinejoin="round" strokewidth="{2}" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </div>
+                <div className="mt-3 text-center sm:mt-5">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                    {error}
+                  </h3>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      There was an error processing your request.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">4.0</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-3xl font-bold text-gray-900 dark:text-white">Rs.899</span>
-              <button className="button">
-                <span className="label">+ Add to card</span>
-                <span className="gradient-container">
-                  <span className="gradient" />
-                </span>
-              </button>
+              <div className="mt-5 sm:mt-6">
+                <button className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm" onclick="closeModal()">
+                  OK
+                </button>
+              </div>
             </div>
           </div>
-
-        <div className='mt-3 flex gap-x-2 ml-60'>
-          <Link to="/edit">
-            <div className='bg-green-400 flex rounded-lg dark:hover:bg-green-700 dark:focus:ring-green-900 '>
-              <Button title="edit" />
-            </div>
-          </Link>
-          <div className='bg-red-600 flex rounded-lg dark:focus:ring-red-800 dark:hover:bg-red-700'>
-            <Button title="delete" />
-          </div>
-
         </div>
       </div>
-    </div>
-  )
+
+    )
+  }
+
+  return (
+    <>
+      <NavBar />
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+        <div className="bg-white rounded-lg shadow-2xl overflow-hidden max-w-md w-full">
+          <h1 className='font-bold text-center text-4xl p-30 bg-gray-800 text-white'>{book.bookgeneric}</h1>
+          {/* Book Details */}
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              {book.bookname}
+            </h2>
+
+            <div className="flex items-center mb-1">
+              <span className="text-3xl font-bold text-gray-800">{book.bookauthor}</span>
+            </div>
+            <p className='text-green-500 text-lg font-bold'>Rs. {book.bookprice}</p>
+
+            {/* Buttons */}
+            <div className="flex gap-3">
+              <Link to="/edit">
+                <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg cursor-pointer">
+                  Edit
+                </button>
+              </Link>
+              <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg cursor-pointer">
+                Delete
+              </button>
+            </div>
+
+          </div>
+
+          {/* Back to Home */}
+          <div className="px-6 pb-6">
+            <Link to="/">
+              <button className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-lg transition duration-200 cursor-pointer">
+                Back to home
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default SinglePage
