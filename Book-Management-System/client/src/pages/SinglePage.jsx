@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import Button from '../components/Button'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const SinglePage = () => {
@@ -9,13 +9,12 @@ const SinglePage = () => {
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(id)
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookWithId = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/books/${id}`);
-        console.log("single book", response);
         setBook(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -26,6 +25,18 @@ const SinglePage = () => {
     fetchBookWithId();
   }, [id]);
 
+
+  const deleteBookWithId = async () => {
+    const response = await axios.delete(`http://localhost:3000/api/books/${id}`);
+    if(response.status === 200){
+      navigate("/");
+      alert("book deleted successfully");
+      setLoading(false);
+    } else {
+      alert("unable to delete")
+      setLoading(false);
+    }
+  }
 
   //loading animation
 if (loading) {
@@ -103,7 +114,7 @@ if (loading) {
                   Edit
                 </button>
               </Link>
-              <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg cursor-pointer">
+              <button onClick={deleteBookWithId} className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg cursor-pointer">
                 Delete
               </button>
             </div>

@@ -74,7 +74,6 @@ const postBook = async (req, res) => {
         });
     };
 
-    //@feature have issue fix it
     if (minBookPrice > bookprice) {
         return res.status(402).json({
             success: false,
