@@ -51,6 +51,8 @@ const EditPage = () => {
     navigate(-1);
   };
 
+  
+  //loading animation
   if (loading) {
     return (
       <div className="flex space-x-2 justify-center items-center bg-white h-screen dark:invert">
@@ -62,6 +64,7 @@ const EditPage = () => {
     );
   };
 
+   //error message
   if (error) {
     return (
       <div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
