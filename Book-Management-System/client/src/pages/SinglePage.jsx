@@ -1,8 +1,9 @@
+//SINGLE PAGE
+
 import React, { useState, useEffect } from 'react'
-import NavBar from '../components/NavBar'
-import Button from '../components/Button'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import NavBar from '../components/NavBar'
 
 const SinglePage = () => {
   const { id } = useParams();
@@ -18,13 +19,12 @@ const SinglePage = () => {
         setBook(response.data.data);
         setLoading(false);
       } catch (error) {
-        setError(error)
-        setLoading(false)
-      }
-    }
+        setError(error);
+        setLoading(false);
+      };
+    };
     fetchBookWithId();
   }, [id]);
-
 
   const deleteBookWithId = async () => {
     const response = await axios.delete(`http://localhost:3000/api/books/${id}`);
@@ -35,11 +35,12 @@ const SinglePage = () => {
     } else {
       alert("unable to delete")
       setLoading(false);
-    }
-  }
+    };
+  };
+
   const handleOnceBack = () => {
     navigate(-1);
-  }
+  };
 
   //loading animation
   if (loading) {
@@ -50,8 +51,8 @@ const SinglePage = () => {
         <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]" />
         <div className="h-8 w-8 bg-black rounded-full animate-bounce" />
       </div>
-    )
-  }
+    );
+  };
 
   //error message
   if (error) {
@@ -90,19 +91,18 @@ const SinglePage = () => {
       </div>
 
     )
-  }
+  };
 
   return (
     <>
       <NavBar />
       
       <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-
          <button
           type='button'
           onClick={handleOnceBack}
           className='bg-blue-600 p-2 cursor-pointer rounded-lg'>Back</button>
-          
+
         <div className="bg-white rounded-lg shadow-2xl overflow-hidden max-w-md w-full">
           <h1 className='font-bold text-center text-4xl p-30 bg-gray-800 text-white'>{book.bookgeneric}</h1>
           {/* Book Details */}
@@ -142,6 +142,6 @@ const SinglePage = () => {
       </div>
     </>
   );
-}
+};
 
-export default SinglePage
+export default SinglePage;

@@ -1,8 +1,9 @@
+//EDIT PAGE
+
 import React, { useState } from 'react'
-import NavBar from '../components/NavBar'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import Button from '../components/Button'
+import {useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import NavBar from '../components/NavBar'
 
 const EditPage = () => {
   const { id } = useParams();
@@ -12,8 +13,7 @@ const EditPage = () => {
   const [bookgeneric, setBookGeneric] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const editBook = async (e) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ const EditPage = () => {
     } catch (error) {
       navigate("/edit");
       setError("failed to edit", error);
-    }
+    };
   };
 
   const handleCancel = () => {
@@ -44,12 +44,12 @@ const EditPage = () => {
       navigate(`/singlepage/${id}`);
     } else {
       navigate(`/singlepage/${id}`);
-    }
-  }
+    };
+  };
 
   const handleOnceBack = () => {
     navigate(-1);
-  }
+  };
 
   if (loading) {
     return (
@@ -59,10 +59,9 @@ const EditPage = () => {
         <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]" />
         <div className="h-8 w-8 bg-black rounded-full animate-bounce" />
       </div>
-    )
-  }
+    );
+  };
 
-  //error message
   if (error) {
     return (
       <div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
@@ -98,7 +97,7 @@ const EditPage = () => {
         </div>
       </div>
     )
-  }
+  };
 
   return (
     <div className=" bg-black min-h-screen">
@@ -207,7 +206,7 @@ const EditPage = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default EditPage
+export default EditPage;

@@ -1,8 +1,10 @@
+//CREATE PAGE
+
 import React, { useState } from 'react'
-import NavBar from '../components/NavBar'
-import Button from '../components/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import NavBar from '../components/NavBar'
+import Button from '../components/Button'
 
 const CreatePage = () => {
   const [bookname, setBookName] = useState('');
@@ -44,15 +46,14 @@ const CreatePage = () => {
     };
   };
 
-  
   const handleCancel = () => {
     const confirmCancel = window.confirm("Are you sure do you want to cancel it");
     if (confirmCancel) {
       navigate("/");
     } else {
       navigate("/");
-    }
-  }
+    };
+  };
 
   if (loading) {
     return (
@@ -63,7 +64,7 @@ const CreatePage = () => {
         <div className="h-8 w-8 bg-black rounded-full animate-bounce" />
       </div>
     )
-  }
+  };
 
   //error message
   if (error) {
@@ -100,8 +101,8 @@ const CreatePage = () => {
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className=" bg-black min-h-screen">
@@ -197,7 +198,6 @@ const CreatePage = () => {
                 ) : ('create')}
               </button>
 
-              
               <button
                 type='button'
                 onClick={handleCancel}
@@ -209,7 +209,7 @@ const CreatePage = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreatePage
+export default CreatePage;

@@ -1,3 +1,5 @@
+//ROUTER PAGE
+
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
@@ -15,7 +17,7 @@ function App() {
                 <Route path='/singlepage/:id' element={<SinglePage />} />
             </Routes>
         </BrowserRouter>
-    )
-}
+    );
+};
 
-export default App
+export default App;

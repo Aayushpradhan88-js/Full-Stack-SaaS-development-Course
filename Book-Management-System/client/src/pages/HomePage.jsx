@@ -1,7 +1,9 @@
+//HOME PAGE
+
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import NavBar from '../components/NavBar'
 import Card from '../components/Card'
-import axios from 'axios'
 
 const HomePage = () => {
   const [books, setBooks] = useState([]);
@@ -17,7 +19,7 @@ const HomePage = () => {
       } catch (error) {
         setError(error);
         setLoading(false);
-      }
+      };
     };
     fetchAllBooks();
   }, []);
@@ -30,10 +32,9 @@ const HomePage = () => {
         <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]" />
         <div className="h-8 w-8 bg-black rounded-full animate-bounce" />
       </div>
-    )
-  }
+    );
+  };
 
-  //error message
   if (error) {
     return (
       <div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
@@ -41,7 +42,6 @@ const HomePage = () => {
           <div className="fixed inset-0 transition-opacity" aria-hidden="true">
             <div className="absolute inset-0 bg-gray-500 opacity-75" />
           </div>
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
           <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <div>
               <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
@@ -69,7 +69,7 @@ const HomePage = () => {
         </div>
       </div>
     )
-  }
+  };
 
   return (
     <div className=' bg-black min-h-screen'>
@@ -78,11 +78,11 @@ const HomePage = () => {
         {books.map((book) => {
           return (
             <Card key={book.id} book={book} />
-          )
-        })}
+          );
+        })};
       </div>
     </div >
-  )
-}
+  );
+};
 
 export default HomePage;
