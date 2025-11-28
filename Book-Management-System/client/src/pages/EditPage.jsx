@@ -19,7 +19,7 @@ const EditPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.patch(`http://localhost:3000/api/books/${id}`,{
+      const response = await axios.patch(`http://localhost:3000/api/books/${id}`, {
         bookname, bookprice, bookauthor, bookgeneric
       });
       console.log(response)
@@ -38,6 +38,18 @@ const EditPage = () => {
     }
   };
 
+  const handleCancel = () => {
+    const confirmCancel = window.confirm("Are you sure do you want to cancel it");
+    if (confirmCancel) {
+      navigate(`/singlepage/${id}`);
+    } else {
+      navigate(`/singlepage/${id}`);
+    }
+  }
+
+  const handleOnceBack = () => {
+    navigate(-1);
+  }
 
   if (loading) {
     return (
@@ -89,13 +101,15 @@ const EditPage = () => {
   }
 
   return (
-  <div className=" bg-black min-h-screen">
+    <div className=" bg-black min-h-screen">
       <NavBar />
-      <Link to="/">
         <div className='mt-4  ml-3'>
-          <Button title="Back to home" />
+          <button
+          type='button'
+          onClick={handleOnceBack}
+          className='bg-blue-600 p-2 cursor-pointer rounded-lg'>Back</button>
         </div>
-      </Link>
+
 
       <form onSubmit={editBook}>
         <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
@@ -156,11 +170,11 @@ const EditPage = () => {
                 placeholder="Hinduism" />
             </div>
 
-            <div className="flex items-center justify-center mb-4">
+            <div className="flex ml-60 gap-3 items-center justify-center mb-4">
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-gray-900 cursor-pointer text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline" type="submit">
+                className="bg-gray-900 cursor-pointer text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline">
                 {loading ? (
                   <>
                     <div aria-label="Loading..." role="status"><svg className="h-12 w-12 animate-spin stroke-gray-500" viewBox="0 0 256 256">
@@ -180,6 +194,13 @@ const EditPage = () => {
                     editing...
                   </>
                 ) : ('edit')}
+              </button>
+
+              <button
+                type='button'
+                onClick={handleCancel}
+                className="bg-red-600 cursor-pointer text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline ">
+                cancel
               </button>
             </div>
           </div>

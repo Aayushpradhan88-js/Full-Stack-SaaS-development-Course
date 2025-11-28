@@ -44,6 +44,15 @@ const CreatePage = () => {
     };
   };
 
+  
+  const handleCancel = () => {
+    const confirmCancel = window.confirm("Are you sure do you want to cancel it");
+    if (confirmCancel) {
+      navigate("/");
+    } else {
+      navigate("/");
+    }
+  }
 
   if (loading) {
     return (
@@ -162,7 +171,7 @@ const CreatePage = () => {
                 placeholder="Hinduism" />
             </div>
 
-            <div className="flex items-center justify-center mb-4">
+            <div className="flex ml-60 gap-3 items-center justify-center mb-4">
               <button
                 type="submit"
                 disabled={loading}
@@ -186,6 +195,14 @@ const CreatePage = () => {
                     creating...
                   </>
                 ) : ('create')}
+              </button>
+
+              
+              <button
+                type='button'
+                onClick={handleCancel}
+                className="bg-red-600 cursor-pointer text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline ">
+                cancel
               </button>
             </div>
           </div>

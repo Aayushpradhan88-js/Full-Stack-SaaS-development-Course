@@ -37,6 +37,9 @@ const SinglePage = () => {
       setLoading(false);
     }
   }
+  const handleOnceBack = () => {
+    navigate(-1);
+  }
 
   //loading animation
   if (loading) {
@@ -92,7 +95,14 @@ const SinglePage = () => {
   return (
     <>
       <NavBar />
+      
       <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+
+         <button
+          type='button'
+          onClick={handleOnceBack}
+          className='bg-blue-600 p-2 cursor-pointer rounded-lg'>Back</button>
+          
         <div className="bg-white rounded-lg shadow-2xl overflow-hidden max-w-md w-full">
           <h1 className='font-bold text-center text-4xl p-30 bg-gray-800 text-white'>{book.bookgeneric}</h1>
           {/* Book Details */}
