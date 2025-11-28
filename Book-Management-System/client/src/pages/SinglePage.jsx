@@ -28,7 +28,7 @@ const SinglePage = () => {
 
   const deleteBookWithId = async () => {
     const response = await axios.delete(`http://localhost:3000/api/books/${id}`);
-    if(response.status === 200){
+    if (response.status === 200) {
       navigate("/");
       alert("book deleted successfully");
       setLoading(false);
@@ -39,7 +39,7 @@ const SinglePage = () => {
   }
 
   //loading animation
-if (loading) {
+  if (loading) {
     return (
       <div className="flex space-x-2 justify-center items-center bg-white h-screen dark:invert">
         <span className="sr-only">Loading...</span>

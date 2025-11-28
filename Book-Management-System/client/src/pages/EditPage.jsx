@@ -12,25 +12,28 @@ const EditPage = () => {
   const [bookgeneric, setBookGeneric] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const navigate = useNavigate();
 
-  const editBook = async () => {
+  const navigate = useNavigate()
+
+  const editBook = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      const response = await axios.patch(`http://localhost:3000/api/book/${id}`,{
+      const response = await axios.patch(`http://localhost:3000/api/books/${id}`,{
         bookname, bookprice, bookauthor, bookgeneric
       });
       console.log(response)
       if (response.status === 200) {
-        // navigate("/");
-        setLoading(false);
+        navigate("/");
         alert("successfully edited")
+        setLoading(false);
       } else {
-        // navigate("/edit");
+        navigate("/edit");
         setError("failed to edit");
         alert("failed to edit");
       }
     } catch (error) {
-      // navigate("/edit");
+      navigate("/edit");
       setError("failed to edit", error);
     }
   };
